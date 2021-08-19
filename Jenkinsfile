@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
-        maven "maven3.8"
+        maven "maven3"
     }
 
     stages {
@@ -30,13 +30,13 @@ pipeline {
         stage('Build') {
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/capgteam/bankapp.git'
+                git 'https://github.com/shraddhagadhave/bankapppubnew.git'
 
                 // Run Maven on a Unix agent.
                 //sh "mvn -Dmaven.test.failure.ignore=true clean package"
 
                 // To run Maven on a Windows agent, use
-                 bat "mvn -f Day1-BankApp\\pom.xml -Dmaven.test.failure.ignore=true clean package"
+                 bat "mvn -f pom.xml -Dmaven.test.failure.ignore=true clean package"
             }
 
             post {
@@ -44,7 +44,7 @@ pipeline {
                 // failed, record the test results and archive the jar file.
                 success {
                     junit '**/target/surefire-reports/TEST-*.xml'
-                    archiveArtifacts 'Day1-BankApp/target/*.jar'
+                    archiveArtifacts '/target/*.jar'
                 }
             }
         }
